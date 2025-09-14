@@ -1,0 +1,22 @@
+rabbitmq:
+    name: rabbitmq
+    rabbitmq_id: 0
+    replicasCount: 1
+    image:
+        repository: rabbitmq
+        tag: latest
+        pullPolicy: Always
+        
+    ports:
+        name: amqp
+        port: 5672
+        containerPort: 5672
+    syncWave: "-28"
+
+    resources:
+        requests:
+            cpu: "50m"
+            memory: "128Mi"
+        limits:
+            cpu: "500m"
+            memory: "1Gi"
