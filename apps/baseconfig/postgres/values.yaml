@@ -5,7 +5,7 @@ postgres:
     image:
         repository: postgres
         tag: latest
-        pullPolicy: Always
+        pullPolicy: IfNotPresent
         pullSecret: regcred
     resources:
         requests:
@@ -25,3 +25,24 @@ postgres:
         targetPort: 5432
         type: ClusterIP
     storage: 5Gi
+
+  
+    backup:
+        enabled: true
+        schedule: "0 0 * * *"  
+        retention: 7           
+        gcs:
+            bucket: "your-gcs-bucket-name"  
+            secretName: "gcs-credentials"   
+    pgbackrest:
+        image:
+            repository: pgbackrest/pgbackrest
+            tag: latest
+            pullPolicy: IfNotPresent
+        resources:
+            requests:
+                cpu: "20m"
+                memory: "128Mi"
+            limits:
+                cpu: "200m"
+                memory: "256Mi"
