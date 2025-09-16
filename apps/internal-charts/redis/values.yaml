@@ -1,0 +1,10 @@
+redis:
+  replicasCount: 1
+  image:
+    repository: redis
+    tag: latest
+    pullPolicy: Always
+  ports:
+    port: 6379
+    containerPort: 6379
+  syncWave: "-30"

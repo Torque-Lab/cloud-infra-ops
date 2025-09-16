@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}-service
+  annotations:
+    argocd.argoproj.io/sync-wave: "-25"
+spec:
+  selector:
+    app: {{ .Chart.Name }}
+  ports:
+    - protocol: TCP
+      name: {{ .Values.primary-backend.ports.name }}
+      port: {{ .Values.primary-backend.ports.port }}
+      targetPort: {{ .Values.primary-backend.ports.containerPort }}
+  type: ClusterIP
+

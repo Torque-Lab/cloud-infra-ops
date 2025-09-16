@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: {{ .Values.backendPoint.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-20"
+spec:
+  ingressClassName: {{ .Values.ingressClassName }}
+  rules:
+    - host: {{ .Values.backendPoint.host }}
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.backendPoint.service }}
+                port:
+                  number: {{ .Values.backendPoint.port }}

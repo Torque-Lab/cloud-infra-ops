@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-options: CreateNamespace=true
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Torque-Lab/cloud-infra-ops.git
+    targetRevision: main
+    path: apps/internal-charts/postgres
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: internal-backend
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

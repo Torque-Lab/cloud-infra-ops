@@ -1,0 +1,24 @@
+nextjs:
+    replicasCount: 1
+    image:
+        repository: ring0exec/frontend
+        tag: bdefe0b1111240a6c0da15c35e9ba0d592b50bef
+        pullPolicy: Always
+        pullSecret: regcred
+    ports:
+        name: http
+        port: 3000
+        containerPort: 3000
+    resources:
+        requests:
+            cpu: "50m"
+            memory: "128Mi"
+        limits:
+            cpu: "500m"
+            memory: "1Gi"
+    autoscaling:
+        enabled: true
+        minReplicas: 1
+        maxReplicas: 2
+        targetCPUUtilizationPercentage: 80
+        targetMemoryUtilizationPercentage: 80

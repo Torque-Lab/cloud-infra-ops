@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: {{ .Values.frontendPoint.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-20"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: {{ .Values.ingressClassName }}
+  tls:
+    - hosts:
+        - {{ .Values.frontendPoint.host }}
+      secretName: {{ .Values.frontendPoint.secret }}-tls
+  rules:
+    - host: {{ .Values.frontendPoint.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.frontendPoint.service }}
+                port:
+                  number: {{ .Values.frontendPoint.port }} 
+        
