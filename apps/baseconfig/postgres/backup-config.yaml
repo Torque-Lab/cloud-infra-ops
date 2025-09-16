@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-backup-scripts
+data:
+  backup.sh: |
+    #!/bin/sh
+    set -e
+    CONTROL_PLANE_URL=${CONTROL_PLANE_URL:-"https://control-plane.example.com/get-gcp-key"}
+    CONTROL_PLANE_TOKEN=${CONTROL_PLANE_TOKEN:-""}  
+    KEY_PATH="/tmp/gcp-key.json"
+    echo "Fetching GCP key from control plane..."
+    curl -sSf -H "Authorization: Bearer $CONTROL_PLANE_TOKEN" \
+     -o $KEY_PATH \
+     $CONTROL_PLANE_URL
+
+    if [ ! -f $KEY_PATH ]; then
+        echo "Failed to fetch GCP key!"
+        exit 1
+    fi
+
+    export GOOGLE_APPLICATION_CREDENTIALS=$KEY_PATH
+
+    TIMESTAMP=$(date +"%Y%m%d%H%M%S")
+    FILENAME="backup-${TIMESTAMP}.sql.gz"
+    pg_dump -h $PGHOST -U $PGUSER $PGDATABASE | gzip > /tmp/$FILENAME
+
+    gsutil cp /tmp/$FILENAME gs://$BUCKET_NAME/
+
+    echo "Backup completed: $FILENAME"
+    rm /tmp/$FILENAME $KEY_PATH
+
+
