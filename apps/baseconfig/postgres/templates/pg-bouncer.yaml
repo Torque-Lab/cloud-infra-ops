@@ -1,10 +1,9 @@
 
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: {{ .Values.postgres.name }}-pgbouncer-{{ .Values.postgres.db_id }}
 spec:
-  serviceName: {{ .Values.postgres.name }}-pgbouncer-{{ .Values.postgres.db_id }}
   replicas: 1
   selector:
     matchLabels:
