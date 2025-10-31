@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deployment
+  labels:
+    app: {{ .Chart.Name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-22" 
+spec:
+  replicas: {{ .Values.redisProtocolGateway.replicasCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.redisProtocolGateway.image.repository }}:{{ .Values.redisProtocolGateway.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.redisProtocolGateway.image.pullPolicy }}
+          ports:
+            - name: {{ .Values.redisProtocolGateway.ports.name }}
+              containerPort: {{ .Values.redisProtocolGateway.ports.containerPort }}
+          resources:
+            {{- toYaml .Values.redisProtocolGateway.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+            seccompProfile:
+              type: RuntimeDefault
+          envFrom:
+           - secretRef:
+               name: tcp-gateway-secret
+  

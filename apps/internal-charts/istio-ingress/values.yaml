@@ -1,12 +1,23 @@
 backendPoint:
-    host: sitewatch.suvidhaportal.com
-    service: express-service
+    host: cloud-vector.suvidhaportal.com
+    service: https-server-service
     namespace: backend
-    port: 3001
+    port: 3005
 ingressClassName: nginx
 frontendPoint:
-    host: sitewatch.suvidhaportal.com
-    service: nextjs-service
+    host: cloud-vector.suvidhaportal.com
+    service: frontend-service
     namespace: frontend
     port: 3000
-    secret: sitewatch
+gateway:
+  selector: ingressgateway
+  namespace: istio-system
+ingress:
+  enabled: false   #  Disable Kubernetes Ingress 
+
+istio:
+  enabled: true    #  Enable Istio integration
+  gateway:
+    enabled: true  #  Deploy Gateway + VirtualService
+    name: shared-gateway
+    namespace: istio-system

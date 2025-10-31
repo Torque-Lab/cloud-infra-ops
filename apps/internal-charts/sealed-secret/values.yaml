@@ -1,6 +1,6 @@
 backendPoint:
-  name: backend
+  name: backend-common-secret
   namespace: backend
 frontendPoint:
-  name: frontend
+  name: frontend-secret
   namespace: frontend

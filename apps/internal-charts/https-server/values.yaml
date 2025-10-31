@@ -1,18 +1,18 @@
-infraProvisioner:
+httpsServer:
     replicasCount: 1
     image:
-        repository: ring0exec/cloud-vector-infra-provisioner
+        repository: ring0exec/cloud-vector-https-server
         tag: 
         pullPolicy: Always
         pullSecret: regcred
     ports:
         name: http
-        port: 3015
-        containerPort: 3015
+        port: 3005
+        containerPort: 3005
     resources:
         requests:
             cpu: "50m"
-            memory: "256Mi"
+            memory: "128Mi"
         limits:
             cpu: "500m"
             memory: "1Gi"

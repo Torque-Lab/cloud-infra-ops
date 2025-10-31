@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+#public service for postgres wire protocol
+metadata:
+  name: {{ .Chart.Name }}-public-service
+  annotations:
+    argocd.argoproj.io/sync-wave: "-21"
+spec:
+  selector:
+    app: {{ .Chart.Name }}
+  ports:
+  - protocol: TCP
+    name: {{ (index .Values.redisProtocolGateway.ports 0).name }}
+    port: {{ (index .Values.redisProtocolGateway.ports 0).port }}
+    targetPort: {{ (index .Values.redisProtocolGateway.ports 0).containerPort }}
+  type: ClusterIP  # change when needed

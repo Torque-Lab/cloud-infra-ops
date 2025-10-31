@@ -1,4 +1,4 @@
-{{- if .Values.nextjs.autoscaling.enabled }}
+{{- if .Values.frontend.autoscaling.enabled }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -10,19 +10,19 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ .Chart.Name }}-deployment
-  minReplicas: {{ .Values.nextjs.autoscaling.minReplicas }}
-  maxReplicas: {{ .Values.nextjs.autoscaling.maxReplicas }}
+  minReplicas: {{ .Values.frontend.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.frontend.autoscaling.maxReplicas }}
   metrics:
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: {{ .Values.nextjs.autoscaling.targetCPUUtilizationPercentage }}
+          averageUtilization: {{ .Values.frontend.autoscaling.targetCPUUtilizationPercentage }}
     - type: Resource
       resource:
         name: memory
         target:
           type: Utilization
-          averageUtilization: {{ .Values.nextjs.autoscaling.targetMemoryUtilizationPercentage }}
+          averageUtilization: {{ .Values.frontend.autoscaling.targetMemoryUtilizationPercentage }}
 {{- end }}

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deployment
+  labels:
+    app: {{ .Chart.Name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-26"
+spec:
+  replicas: {{ .Values.httpsServer.replicasCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.httpsServer.image.repository }}:{{ .Values.httpsServer.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.httpsServer.image.pullPolicy }}
+          imagePullSecrets:
+            - name: {{ .Values.httpsServer.image.pullSecret }}
+          ports:
+            - name: {{ .Values.httpsServer.ports.name }}
+              port: {{ .Values.httpsServer.ports.port }} 
+              containerPort: {{ .Values.httpsServer.ports.containerPort }}
+          resources:
+            {{- toYaml .Values.httpsServer.resources | nindent 12 }}
+          securityContext:
+            seccompProfile:
+              type: RuntimeDefault
+          envFrom:
+           - secretRef:
+               name: common-backend-secret

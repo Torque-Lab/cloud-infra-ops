@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.frontendPoint.secret }}-tls
+  namespace: {{ .Values.gateway.namespace | default "istio-system" }} 
+spec:
+  secretName: {{ .Values.frontendPoint.secret }}-tls
+  duration: 2160h
+  renewBefore: 360h
+  commonName: {{ .Values.frontendPoint.host }}
+  dnsNames:
+    - {{ .Values.frontendPoint.host }}
+    - {{ .Values.backendPoint.host }}
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

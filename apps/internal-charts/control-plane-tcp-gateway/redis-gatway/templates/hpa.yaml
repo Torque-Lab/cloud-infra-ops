@@ -1,4 +1,4 @@
-{{- if .Values.infraProvisioner.autoscaling.enabled }}
+{{- if .Values.redisProtocolGateway.autoscaling.enabled }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -10,19 +10,19 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ .Chart.Name }}-deployment
-  minReplicas: {{ .Values.infraProvisioner.autoscaling.minReplicas }}
-  maxReplicas: {{ .Values.infraProvisioner.autoscaling.maxReplicas }}
+  minReplicas: {{ .Values.redisProtocolGateway.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.redisProtocolGateway.autoscaling.maxReplicas }}
   metrics:
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: {{ .Values.infraProvisioner.autoscaling.targetCPUUtilizationPercentage }}
+          averageUtilization: {{ .Values.redisProtocolGateway.autoscaling.targetCPUUtilizationPercentage }}
     - type: Resource
       resource:
         name: memory
         target:
           type: Utilization
-          averageUtilization: {{ .Values.infraProvisioner.autoscaling.targetMemoryUtilizationPercentage }}
+          averageUtilization: {{ .Values.redisProtocolGateway.autoscaling.targetMemoryUtilizationPercentage }}
 {{- end }}

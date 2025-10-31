@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deployment
+  labels:
+    app: {{ .Chart.Name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-22" 
+spec:
+  replicas: {{ .Values.rabbitAMQPGateway.replicasCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.rabbitAMQPGateway.image.repository }}:{{ .Values.rabbitAMQPGateway.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.rabbitAMQPGateway.image.pullPolicy }}
+          ports:
+            - name: {{ .Values.rabbitAMQPGateway.ports.name }}
+              containerPort: {{ .Values.rabbitAMQPGateway.ports.containerPort }}
+          resources:
+            {{- toYaml .Values.rabbitAMQPGateway.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+            seccompProfile:
+              type: RuntimeDefault
+          envFrom:
+           - secretRef:
+               name: tcp-gateway-secret
+  

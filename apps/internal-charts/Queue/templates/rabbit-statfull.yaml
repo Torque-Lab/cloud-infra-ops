@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.rabbitmq.name }}-{{ .Values.rabbitmq.rabbitmq_id }}
+  annotations:
+    argocd.argoproj.io/sync-wave: {{ .Values.rabbitmq.syncWave | quote }}
+spec:
+  replicas: {{ .Values.rabbitmq.replicasCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.rabbitmq.name }}-{{ .Values.rabbitmq.rabbitmq_id }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.rabbitmq.name }}-{{ .Values.rabbitmq.rabbitmq_id }}
+    spec:
+      containers:
+        - name: {{ .Values.rabbitmq.name }}-{{ .Values.rabbitmq.rabbitmq_id }}
+          image: {{ .Values.rabbitmq.image.repository }}:{{ .Values.rabbitmq.image.tag }}
+          ports:
+            - containerPort: {{ .Values.rabbitmq.ports.containerPort }}
+          resources:
+            {{- toYaml .Values.rabbitmq.resources | nindent 12 }}
+          securityContext:
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: {{ .Values.rabbitmq.name }}-{{ .Values.rabbitmq.rabbitmq_id }}-data
+              mountPath: /var/lib/rabbitmq/mnesia/rabbitmqdata 
+      volumeClaimTemplates:
+        - metadata:
+            name: {{ .Values.rabbitmq.name }}-{{ .Values.rabbitmq.rabbitmq_id }}-data
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: {{ .Values.rabbitmq.storage }}

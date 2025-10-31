@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Chart.Name }}-backend
+  namespace: {{ .Values.backendPoint.namespace }}
+  annotations:
+   argocd.argoproj.io/sync-wave: "-49"
+spec:
+  hosts:
+  - {{ .Values.backendPoint.host }}
+  gateways:
+  - {{ .Values.namespace | default "istio-system" }}/{{ .Chart.Name }}-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /api
+    route:
+    - destination:
+        host: {{ .Values.backendPoint.service }}.{{ .Values.backendPoint.namespace }}.svc.cluster.local
+        port:
+          number: {{ .Values.backendPoint.port }}

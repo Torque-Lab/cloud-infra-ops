@@ -1,0 +1,32 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: {{ .Chart.Name }}-gateway
+  namespace: {{ .Values.namespace | default "istio-system" }}
+  annotations:
+   argocd.argoproj.io/sync-wave: "-50"
+spec:
+  selector:
+    istio: {{ .Values.gateway.selector | default "ingressgateway" }}
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - {{ .Values.frontendPoint.host }}
+    - {{ .Values.backendPoint.host }}
+     tls:
+        httpsRedirect: true   #
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: {{ .Values.frontendPoint.secret }}-tls
+    hosts:
+    - {{ .Values.frontendPoint.host }}
+    - {{ .Values.backendPoint.host }}
+
+

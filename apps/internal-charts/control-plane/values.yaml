@@ -1,18 +1,18 @@
-infraProvisioner:
+controlPlane:
     replicasCount: 1
     image:
-        repository: ring0exec/cloud-vector-infra-provisioner
+        repository: ring0exec/cloud-vector-control-plane
         tag: 
         pullPolicy: Always
         pullSecret: regcred
     ports:
         name: http
-        port: 3015
-        containerPort: 3015
+        port: 3010
+        containerPort: 3010
     resources:
         requests:
             cpu: "50m"
-            memory: "256Mi"
+            memory: "128Mi"
         limits:
             cpu: "500m"
             memory: "1Gi"

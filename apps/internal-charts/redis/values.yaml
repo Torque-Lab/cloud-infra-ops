@@ -1,9 +1,18 @@
 redis:
+  name: redis
+  redis_id: 1
   replicasCount: 1
   image:
     repository: redis
     tag: latest
     pullPolicy: Always
+  resources:
+    limits:
+      memory: "128Mi"
+      cpu: "256m"
+    requests:
+      memory: "64Mi"
+      cpu: "128m"
   ports:
     port: 6379
     containerPort: 6379

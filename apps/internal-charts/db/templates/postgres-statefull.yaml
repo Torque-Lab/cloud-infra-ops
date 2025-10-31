@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}
+spec:
+  serviceName: {{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}
+  replicas: {{ .Values.postgres.replicasCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}
+    spec:
+      containers:
+        - name: {{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}
+          image: {{ .Values.postgres.image.repository }}:{{ .Values.postgres.image.tag }}
+          imagePullPolicy: {{ .Values.postgres.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.postgres.resources | nindent 12 }}
+          ports:
+            - containerPort: 5432
+          securityContext:
+            # allowPrivilegeEscalation: false
+            # readOnlyRootFilesystem: true
+            # capabilities:
+            #   drop: ["ALL"]
+            seccompProfile:
+              type: RuntimeDefault
+          envFrom:
+            - secretRef:
+                name: backend-common-secret
+        
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data/rpgdata      
+              name: {{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-data
+      volumes:
+        - name: {{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-pvc

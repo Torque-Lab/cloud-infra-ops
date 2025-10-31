@@ -1,14 +1,18 @@
-frontend:
+postgresProtocolGateway:
+    namespace: control-plane-tcp-gateway
     replicasCount: 1
     image:
-        repository: ring0exec/cloud-vector-frontend
+        repository: ring0exec/cloud-vector-postgres-protocol-gateway
         tag: 
         pullPolicy: Always
         pullSecret: regcred
     ports:
-        name: http
-        port: 3000
-        containerPort: 3000
+      - name: postgres-wire-protocol
+        port: 5432
+        containerPort: 5432
+      - name: http
+        port: 9000
+        containerPort: 9000
     resources:
         requests:
             cpu: "50m"

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+#public service for rabbit aqmp protocol
+metadata:
+  name: {{ .Chart.Name }}-public-service
+  annotations:
+    argocd.argoproj.io/sync-wave: "-21"
+spec:
+  selector:
+    app: {{ .Chart.Name }}
+  ports:
+  - protocol: TCP
+    name: {{ (index .Values.rabbitAMQPGateway.ports 0).name }}
+    port: {{ (index .Values.rabbitAMQPGateway.ports 0).port }}
+    targetPort: {{ (index .Values.rabbitAMQPGateway.ports 0).containerPort }}
+  type: ClusterIP  # change to LoadBalancer when  needed

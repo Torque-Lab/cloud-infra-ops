@@ -1,11 +1,12 @@
 postgres:
+    db_id: 0
+    name: postgres
     replicasCount: 1
     image:
         repository: postgres
         tag: latest
-        pullPolicy: Always
+        pullPolicy: IfNotPresent
         pullSecret: regcred
-    name: postgres
     resources:
         requests:
             cpu: "100m"
@@ -14,7 +15,7 @@ postgres:
             cpu: "500m"
             memory: "1Gi"
     autoscaling:
-        enabled: true
+        enabled: false
         minReplicas: 1
         maxReplicas: 2
         targetCPUUtilizationPercentage: 80
@@ -23,4 +24,10 @@ postgres:
         port: 5432
         targetPort: 5432
         type: ClusterIP
-    storage: 5Gi
+    storage: 2Gi
+
+    backup:
+        enabled: false
+        schedule: "0 0 * * *"  
+        retention: 7           
+      

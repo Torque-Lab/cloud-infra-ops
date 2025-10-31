@@ -1,14 +1,18 @@
-frontend:
+redisProtocolGateway:
+    namespace: control-plane-tcp-gateway
     replicasCount: 1
     image:
-        repository: ring0exec/cloud-vector-frontend
+        repository: ring0exec/cloud-vector-redis-protocol-gateway
         tag: 
         pullPolicy: Always
         pullSecret: regcred
-    ports:
-        name: http
-        port: 3000
-        containerPort: 3000
+    ports:  
+      - name: redis-protocol
+        port: 6379
+        containerPort: 6379
+      - name: http
+        port: 9000
+        containerPort: 9000
     resources:
         requests:
             cpu: "50m"
