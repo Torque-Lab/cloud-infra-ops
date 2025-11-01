@@ -1,13 +1,13 @@
+    #this is intentinal duplication for future readability
 backendPoint:
     host: cloud-vector.suvidhaportal.com
     service: https-server-service
-    namespace: backend
+    namespace: internal-backend
     port: 3005
-ingressClassName: nginx
 frontendPoint:
     host: cloud-vector.suvidhaportal.com
     service: frontend-service
-    namespace: frontend
+    namespace: internal-frontend
     port: 3000
 gateway:
   selector: ingressgateway
@@ -21,3 +21,21 @@ istio:
     enabled: true  #  Deploy Gateway + VirtualService
     name: shared-gateway
     namespace: istio-system
+
+gatewaysListForCertificate:
+   frontendWithBackend:
+     host: cloud-vector.suvidhaportal.com
+     secret: frontend-backend
+     namespace: istio-system
+   postgres:
+     host: pg-cloud-vector.suvidhaportal.com
+     secret: postgres
+     namespace: tcp-gateway
+   redis:
+     host: redis-cloud-vector.suvidhaportal.com
+     secret: redis
+     namespace: tcp-gateway
+   rabbitmq:
+     host: rabbitmq-cloud-vector.suvidhaportal.com
+     secret: rabbitmq
+     namespace: tcp-gateway

@@ -1,19 +1,20 @@
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: control-plane
+  name: postgres-protocol-gateway
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-options: CreateNamespace=true  
+    argocd.argoproj.io/sync-options: CreateNamespace=true 
 spec:
   project: default
   source:
     repoURL: https://github.com/Torque-Lab/cloud-infra-ops.git
     targetRevision: main
-    path: apps/internal-charts/control-plane
+    path: apps/internal-charts/control-plane-tcp-gateway/postgres-protocol-gateway
   destination:
     server: https://kubernetes.default.svc
-    namespace: internal-backend
+    namespace: tcp-gateway
   syncPolicy:
     automated:
       prune: true

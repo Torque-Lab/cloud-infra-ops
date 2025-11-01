@@ -10,10 +10,10 @@ spec:
   source:
     repoURL: https://github.com/Torque-Lab/cloud-infra-ops.git
     targetRevision: main
-    path: apps/internal-charts/ingress
+    path: apps/internal-charts/istio-ingress
   destination:
     server: https://kubernetes.default.svc
-    namespace: ""
+    namespace: ""  #handle by repsective file
   syncPolicy:
     automated:
       prune: true

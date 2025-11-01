@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: primary-backend
+  name: queue
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-options: CreateNamespace=true  # Create the namespace=backend if it doesn't exist 
+    argocd.argoproj.io/sync-options: CreateNamespace=true
 spec:
   project: default
   source:
     repoURL: https://github.com/Torque-Lab/cloud-infra-ops.git
     targetRevision: main
-    path: apps/internal-charts/primary-backend
+    path: apps/internal-charts/queue
   destination:
     server: https://kubernetes.default.svc
     namespace: internal-backend

@@ -1,6 +1,6 @@
 # gitignore for mointering-gitops
-
 secret-backend.yaml
 secret-frontend.yaml
 secret.yaml
 README.md
+secret-tcp-gateway.yaml

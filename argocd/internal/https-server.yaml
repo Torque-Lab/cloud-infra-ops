@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rabbitmq
+  name: https-server
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-options: CreateNamespace=true
+    argocd.argoproj.io/sync-options: CreateNamespace=true  
 spec:
   project: default
   source:
     repoURL: https://github.com/Torque-Lab/cloud-infra-ops.git
     targetRevision: main
-    path: apps/internal-charts/rabbitmq
+    path: apps/internal-charts/https-server
   destination:
     server: https://kubernetes.default.svc
     namespace: internal-backend

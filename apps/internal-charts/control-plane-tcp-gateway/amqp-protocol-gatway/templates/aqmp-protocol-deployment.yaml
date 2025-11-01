@@ -35,4 +35,11 @@ spec:
           envFrom:
            - secretRef:
                name: tcp-gateway-secret
-  
+          volumeMounts:
+            - name: tls-secret
+              mountPath: /etc/ssl/certs
+              readOnly: true
+      volumes:
+        - name: tls-secret
+          secret:
+            secretName: tcp-gateway-tls
