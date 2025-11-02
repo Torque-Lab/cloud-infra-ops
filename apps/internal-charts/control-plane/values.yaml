@@ -2,7 +2,7 @@ controlPlane:
     replicasCount: 1
     image:
         repository: ring0exec/cloud-vector-control-plane
-        tag: 
+        tag: d299967a1ec93ddb6174a84e0f2b81036bf9cf21
         pullPolicy: Always
         pullSecret: regcred
     ports:
