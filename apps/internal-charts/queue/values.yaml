@@ -1,6 +1,6 @@
 rabbitmq:
     name: rabbitmq
-    rabbitmq_id: 1
+    rabbitmq_id: 0
     replicasCount: 1
     image:
         repository: rabbitmq

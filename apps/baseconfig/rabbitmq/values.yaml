@@ -3,9 +3,10 @@ rabbitmq:
     rabbitmq_id: 0
     replicasCount: 1
     image:
-        repository: rabbitmq
-        tag: latest
-        pullPolicy: Always
+        repository: ring0exec/cloud-vector-rabbitmq
+        tag: v1
+        pullPolicy: IfNotPresent
+        pullSecret: regcred
         
     ports:
         name: amqp

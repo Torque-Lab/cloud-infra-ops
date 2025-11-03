@@ -3,8 +3,8 @@ postgres:
     name: postgres
     replicasCount: 1
     image:
-        repository: postgres
-        tag: latest
+        repository: ring0exec/cloud-vector-postgres
+        tag: v1
         pullPolicy: IfNotPresent
         pullSecret: regcred
     resources:
@@ -31,4 +31,10 @@ postgres:
         enabled: true
         schedule: "0 0 * * *"  
         retention: 7           
-      
+
+
+env:
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "postgresMbuguv767ug"
+  POSTGRES_DB: "postgres"
+    

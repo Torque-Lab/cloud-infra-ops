@@ -1,6 +1,6 @@
 redis:
   name: redis
-  redis_id: 1
+  redis_id: 0
   replicasCount: 1
   image:
     repository: redis

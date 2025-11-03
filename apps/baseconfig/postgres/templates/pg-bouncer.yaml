@@ -17,18 +17,19 @@ spec:
       - name: pgbouncer
         image: edoburu/pgbouncer
         ports:
-        - containerPort: 5432
-        env:
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: external-backend-secret
-              key: POSTGRES_USER
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: external-backend-secret
-              key: POSTGRES_PASSWORD
-        - name: POSTGRES_HOST
-          value: {{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-service.default.svc.cluster.local
-
+        - containerPort: 6432
+        volumeMounts:
+        - name: config
+          mountPath: /etc/pgbouncer
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Values.postgres.name }}-pgbouncer-{{ .Values.postgres.db_id }}-ini-configmap
+          

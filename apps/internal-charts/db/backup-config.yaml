@@ -7,7 +7,7 @@ data:
   backup.sh: |
     #!/bin/sh
     set -e
-    CONTROL_PLANE_URL=${CONTROL_PLANE_URL:-"https://control-plane.example.com/get-gcp-key"}
+    CONTROL_PLANE_URL=${CONTROL_PLANE_URL:-"http://control-plane-service:3010/get-gcp-key"}
     CONTROL_PLANE_TOKEN=${CONTROL_PLANE_TOKEN:-""}  
     KEY_PATH="/tmp/gcp-key.json"
     echo "Fetching GCP key from control plane..."
