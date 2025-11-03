@@ -5,6 +5,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: {{ .Values.rabbitmq.syncWave | quote }}
 spec:
+  serviceName: "{{ .Values.rabbitmq.name }}-{{ .Values.rabbitmq.rabbitmq_id }}-service"
   replicas: {{ .Values.rabbitmq.replicasCount }}
   selector:
     matchLabels:
@@ -27,9 +28,9 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /var/lib/rabbitmq/mnesia/rabbitmqdata 
-      volumeClaimTemplates:
-        - metadata:
-            name: data
+  volumeClaimTemplates:
+     - metadata:
+          name: data
           spec:
             accessModes: ["ReadWriteOnce"]
             storageClassName: {{ .Values.rabbitmq.storageClass | quote }}

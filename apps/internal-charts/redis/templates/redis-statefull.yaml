@@ -5,6 +5,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: {{ .Values.redis.syncWave | default "-25" | quote }}
 spec:
+  serviceName: "{{ .Values.redis.name }}-{{ .Values.redis.redis_id }}-service"
   replicas: {{ .Values.redis.replicasCount }}
   selector:
     matchLabels:
@@ -28,4 +29,16 @@ spec:
               drop: ["ALL"]
             seccompProfile:
               type: RuntimeDefault
-        
+
+          volumeMounts:
+            - name: data
+              mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: {{ .Values.redis.storageClass | quote }}
+        resources:
+          requests:
+            storage: {{ .Values.redis.storage | default "1Gi" }}

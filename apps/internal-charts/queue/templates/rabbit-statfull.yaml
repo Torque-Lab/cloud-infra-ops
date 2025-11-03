@@ -9,6 +9,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.rabbitmq.name }}-{{ .Values.rabbitmq.rabbitmq_id }}
+  serviceName: "{{ .Values.rabbitmq.name }}-{{ .Values.rabbitmq.rabbitmq_id }}-service"
   template:
     metadata:
       labels:
@@ -29,13 +30,14 @@ spec:
                 name: common-backend-secret
           volumeMounts:
             - name: data
-              mountPath: /var/lib/rabbitmq/mnesia/rabbitmqdata 
-      volumeClaimTemplates:
-        - metadata:
-            name: data
-          spec:
-            accessModes: ["ReadWriteOnce"]
-            storageClassName: {{ .Values.rabbitmq.storageClass | quote }}
-            resources:
-              requests:
-                storage: {{ .Values.rabbitmq.storage | default "1Gi" }}
+              mountPath: /var/lib/rabbitmq/mnesia/rabbitmqdata
+
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: {{ .Values.rabbitmq.storageClass | quote }}
+        resources:
+          requests:
+            storage: {{ .Values.rabbitmq.storage | default "1Gi" }}

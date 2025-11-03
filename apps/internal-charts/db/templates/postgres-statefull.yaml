@@ -5,7 +5,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-98"
 spec:
-  serviceName: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}"
+  serviceName: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-service"
   replicas: {{ .Values.postgres.replicasCount }}
   selector:
     matchLabels:
@@ -38,12 +38,12 @@ spec:
             - mountPath: /var/lib/postgresql/data/rpgdata      
               name: data
      
-    volumeClaimTemplates:
+  volumeClaimTemplates:
     - metadata:
         name: data
       spec:
         accessModes: ["ReadWriteOnce"]
+        storageClassName: {{ .Values.postgres.storageClass | quote }}
         resources:
           requests:
-            storage: {{ .Values.postgres.storage| default "2Gi" }}
-        storageClassName: {{ .Values.postgres.storageClass | quote }}
+            storage: {{ .Values.postgres.storage | default "1Gi" }}

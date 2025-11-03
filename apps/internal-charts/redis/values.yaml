@@ -17,3 +17,5 @@ redis:
     port: 6379
     containerPort: 6379
   syncWave: "-96"
+  storageClass: "standard"
+  storage: "1Gi"

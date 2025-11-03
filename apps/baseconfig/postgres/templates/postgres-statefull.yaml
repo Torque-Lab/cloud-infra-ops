@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}"
 spec:
-  serviceName: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}"
+  serviceName: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-service"
   replicas: {{ .Values.postgres.replicasCount }}
   selector:
     matchLabels:
@@ -39,7 +39,7 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data/rpgdata      
               name: data
-    volumeClaimTemplates:
+  volumeClaimTemplates:
     - metadata:
         name: data
       spec:
