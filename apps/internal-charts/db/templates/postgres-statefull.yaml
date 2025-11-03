@@ -37,7 +37,13 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data/rpgdata      
               name: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-data"
-      volumes:
-        - name: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-data"
-          persistentVolumeClaim:
-            claimName: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-pvc"
+     
+    volumeClaimTemplates:
+    - metadata:
+        name: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-data"
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: {{ .Values.postgres.storageSize | default "10Gi" }}
+        storageClassName: {{ .Values.postgres.storageClass | quote }}
