@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-service
+  name: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-service"
   labels:
-    app: {{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}
+    app: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}"
 spec:
   selector:
-    app: {{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}
+    app: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}"
   ports:
     - port: {{ .Values.postgres.service.port }}
       targetPort: {{ .Values.postgres.service.targetPort }}

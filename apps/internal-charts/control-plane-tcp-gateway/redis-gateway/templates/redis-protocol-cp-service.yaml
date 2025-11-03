@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 #control plane service for redis wire protocol to fetch dynamic route table
 metadata:
-  name: {{ .Chart.Name }}-control-plane-service
+  name: "{{ .Chart.Name }}-control-plane-service"
   annotations:
     argocd.argoproj.io/sync-wave: "-22"
 spec:

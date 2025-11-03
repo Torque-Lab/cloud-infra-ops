@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.postgres.name }}-pgbouncer-{{ .Values.postgres.db_id }}-ini-configmap
+  name: "{{ .Values.postgres.name }}-pgbouncer-{{ .Values.postgres.db_id }}-ini-configmap"
 data:
   pgbouncer.ini: |
     [databases]

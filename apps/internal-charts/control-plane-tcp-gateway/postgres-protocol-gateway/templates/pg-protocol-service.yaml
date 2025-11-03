@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 #public service for postgres wire protocol
 metadata:
-  name: {{ .Chart.Name }}-public-service
+  name: "{{ .Chart.Name }}-public-service"
   annotations:
     argocd.argoproj.io/sync-wave: "-21"
 spec:
