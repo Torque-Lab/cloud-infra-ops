@@ -18,4 +18,4 @@ spec:
     - destination:
         host: "{{ .Values.frontendPoint.service }}.{{ .Values.frontendPoint.namespace }}.svc.cluster.local"
         port:
-          number: "{{ .Values.frontendPoint.port }}"
+          number: {{ .Values.frontendPoint.port }}
