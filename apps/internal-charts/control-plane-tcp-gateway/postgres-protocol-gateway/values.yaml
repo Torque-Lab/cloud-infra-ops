@@ -7,7 +7,7 @@ postgresProtocolGateway:
         pullPolicy: Always
         pullSecret: regcred
     ports:
-      - name: postgres-wire-protocol
+      - name: postgresql
         port: 5432
         containerPort: 5432
       - name: http

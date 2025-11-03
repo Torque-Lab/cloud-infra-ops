@@ -7,7 +7,7 @@ rabbitAMQPGateway:
         pullPolicy: Always
         pullSecret: regcred
     ports:
-      - name: rabbit-amqp-protocol
+      - name: amqp
         port: 5671
         containerPort: 5671
       - name: http
