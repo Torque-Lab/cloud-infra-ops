@@ -8,3 +8,4 @@ secret-tcp-gateway.yaml
 .env.tcp
 bc-secret.yaml
 tcp-secret.yaml
+apps/internal-charts/sealed-secret/templates/*.pem
