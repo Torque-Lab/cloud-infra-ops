@@ -8,9 +8,9 @@ spec:
   secretName: {{ $cfg.secret }}-tls
   duration: 2160h
   renewBefore: 360h
-  commonName: {{ $cfg.host }}
+  commonName: "{{ $cfg.host }}"
   dnsNames:
-    - {{ $cfg.host }}
+    - "{{ $cfg.host }}"
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer

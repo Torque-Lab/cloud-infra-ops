@@ -14,9 +14,8 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - {{ .Values.frontendPoint.host }}
-    - {{ .Values.backendPoint.host }}
-     tls:
+    - "{{ .Values.frontendPoint.host }}"
+    tls:
         httpsRedirect: true   
   - port:
       number: 443
@@ -26,7 +25,7 @@ spec:
       mode: SIMPLE
       credentialName: {{ .Values.gatewaysListForCertificate.frontendWithBackend.secret }}-tls
     hosts:
-    - {{ .Values.frontendPoint.host }}
-    - {{ .Values.backendPoint.host }}
+    - "{{ .Values.frontendPoint.host }}"
+   
 
 

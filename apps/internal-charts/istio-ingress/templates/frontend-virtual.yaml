@@ -7,7 +7,7 @@ metadata:
    argocd.argoproj.io/sync-wave: "-48"
 spec:
   hosts:
-  - {{ .Values.frontendPoint.host }}
+  - "{{ .Values.frontendPoint.host }}"
   gateways:
   - {{ .Values.namespace | default "istio-system" }}/{{ .Chart.Name }}-gateway
   http:
@@ -16,6 +16,6 @@ spec:
         prefix: /
     route:
     - destination:
-        host: {{ .Values.frontendPoint.service }}.{{ .Values.frontendPoint.namespace }}.svc.cluster.local
+        host: "{{ .Values.frontendPoint.service }}.{{ .Values.frontendPoint.namespace }}.svc.cluster.local"
         port:
-          number: {{ .Values.frontendPoint.port }}
+          number: "{{ .Values.frontendPoint.port }}"
