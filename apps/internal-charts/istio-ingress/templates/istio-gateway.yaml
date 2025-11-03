@@ -15,8 +15,8 @@ spec:
       protocol: HTTP
     hosts:
     - "{{ .Values.frontendPoint.host }}"
-    tls:
-        httpsRedirect: true   
+    # tls:
+    #     httpsRedirect: true  just to issue certificate then make true
   - port:
       number: 443
       name: https
