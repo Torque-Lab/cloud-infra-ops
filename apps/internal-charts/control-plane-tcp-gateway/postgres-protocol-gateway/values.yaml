@@ -3,7 +3,7 @@ postgresProtocolGateway:
     replicasCount: 1
     image:
         repository: ring0exec/cloud-vector-postgres-protocol-gateway
-        tag: 0de205bb016dc9a550c513bc55f96bfb90913a70
+        tag: 0de205bb016dc9a550c513bc55f96bfb90913a70
         pullPolicy: Always
         pullSecret: regcred
     ports:

@@ -3,7 +3,7 @@ redisProtocolGateway:
     replicasCount: 1
     image:
         repository: ring0exec/cloud-vector-redis-protocol-gateway
-        tag: cb1c39afaa9d699c5ce58d4335f10ae5b4d7985e
+        tag: cb1c39afaa9d699c5ce58d4335f10ae5b4d7985e
         pullPolicy: Always
         pullSecret: regcred
     ports:  
