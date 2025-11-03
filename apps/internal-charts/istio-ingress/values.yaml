@@ -23,19 +23,19 @@ istio:
     namespace: istio-system
 
 gatewaysListForCertificate:
-   frontendWithBackend:
-     host: cloud-vector.suvidhaportal.com
-     secret: frontend-backend
-     namespace: istio-system
-   postgres:
-     host: pg-cloud-vector.suvidhaportal.com
-     secret: postgres
-     namespace: tcp-gateway
-   redis:
-     host: redis-cloud-vector.suvidhaportal.com
-     secret: redis
-     namespace: tcp-gateway
-   rabbitmq:
-     host: rabbitmq-cloud-vector.suvidhaportal.com
-     secret: rabbitmq
-     namespace: tcp-gateway
+  frontendWithBackend:
+    host: cloud-vector.suvidhaportal.com
+    secret: frontend-backend
+    namespace: istio-system
+  postgres:
+    host: pg-cloud-vector.suvidhaportal.com
+    secret: postgres
+    namespace: tcp-gateway
+  redis:
+    host: redis-cloud-vector.suvidhaportal.com
+    secret: redis
+    namespace: tcp-gateway
+  rabbitmq:
+    host: rabbitmq-cloud-vector.suvidhaportal.com
+    secret: rabbitmq
+    namespace: tcp-gateway
