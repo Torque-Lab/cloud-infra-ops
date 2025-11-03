@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ .Chart.Name }}
   annotations:
-    argocd.argoproj.io/sync-wave: "-26"
+    argocd.argoproj.io/sync-wave: "-94"
 spec:
   replicas: {{ .Values.httpsServer.replicasCount }}
   selector:
