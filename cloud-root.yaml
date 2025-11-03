@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cloud-root
-  namespace: argocd
+  namespace: argocd-cloud-root
 spec:
   project: default
   source:
