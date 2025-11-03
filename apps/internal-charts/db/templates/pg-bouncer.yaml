@@ -13,6 +13,16 @@ spec:
       labels:
         app: "{{ .Values.postgres.name }}-pgbouncer-{{ .Values.postgres.db_id }}"
     spec:
+      initContainers:
+      - name: init-pgbouncer-config
+        image: busybox
+        command: ['sh', '-c', 'cp /config-temp/* /etc/pgbouncer/ && chmod 644 /etc/pgbouncer/*']
+        volumeMounts:
+        - name: config
+          mountPath: /config-temp
+          readOnly: true
+        - name: config-volume
+          mountPath: /etc/pgbouncer
       containers:
       - name: pgbouncer
         image: edoburu/pgbouncer
@@ -21,9 +31,6 @@ spec:
         envFrom:
           - secretRef:
               name: common-backend-secret
-        volumeMounts:
-        - name: config
-          mountPath: /etc/pgbouncer
         resources:
           requests:
             cpu: 50m
@@ -31,8 +38,14 @@ spec:
           limits:
             cpu: 200m
             memory: 256Mi
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/pgbouncer
       volumes:
-        - name: config
-          configMap:
-            name: "{{ .Values.postgres.name }}-pgbouncer-{{ .Values.postgres.db_id }}-ini-configmap"
+      - name: config
+        configMap:
+          name: "{{ .Values.postgres.name }}-pgbouncer-{{ .Values.postgres.db_id }}-ini-configmap"
+          defaultMode: 0644 #base8
+      - name: config-volume
+        emptyDir: {}
           
