@@ -25,6 +25,7 @@ postgres:
         targetPort: 5432
         type: ClusterIP
     storage: 5Gi
+    storageClass: standard-rwo
 
   
     backup:

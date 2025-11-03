@@ -24,14 +24,18 @@ spec:
           securityContext:
             seccompProfile:
               type: RuntimeDefault
+          envFrom:
+            - secretRef:
+                name: common-backend-secret
           volumeMounts:
-            - name: {{ .Values.rabbitmq.name }}-{{ .Values.rabbitmq.rabbitmq_id }}-data
+            - name: data
               mountPath: /var/lib/rabbitmq/mnesia/rabbitmqdata 
       volumeClaimTemplates:
         - metadata:
-            name: {{ .Values.rabbitmq.name }}-{{ .Values.rabbitmq.rabbitmq_id }}-data
+            name: data
           spec:
             accessModes: ["ReadWriteOnce"]
+            storageClassName: {{ .Values.rabbitmq.storageClass | quote }}
             resources:
               requests:
-                storage: {{ .Values.rabbitmq.storage }}
+                storage: {{ .Values.rabbitmq.storage | default "1Gi" }}

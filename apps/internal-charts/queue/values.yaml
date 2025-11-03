@@ -12,6 +12,8 @@ rabbitmq:
         port: 5672
         containerPort: 5672
     syncWave: "-95"
+    storage: "1Gi"
+    storageClass: standard-rwo
 
     resources:
         requests:
