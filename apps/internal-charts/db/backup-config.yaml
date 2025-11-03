@@ -1,4 +1,4 @@
-{{- if .Values.postgres.backup.enabled }}
+{{- if .Values.postgres.backup.enabled -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -31,6 +31,6 @@ data:
     echo "Backup completed: $FILENAME"
     rm /tmp/$FILENAME $KEY_PATH
 
-{{- end }}
+{{- end -}}
 
 

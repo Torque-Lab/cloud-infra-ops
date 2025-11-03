@@ -1,4 +1,4 @@
-{{- if .Values.httpsServer.autoscaling.enabled }}
+{{- if .Values.httpsServer.autoscaling.enabled -}}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -25,4 +25,4 @@ spec:
         target:
           type: Utilization
           averageUtilization: {{ .Values.httpsServer.autoscaling.targetMemoryUtilizationPercentage }}
-{{- end }}
+{{- end -}}

@@ -1,4 +1,4 @@
-{{- if .Values.postgres.backup.enabled }}
+{{- if .Values.postgres.backup.enabled -}}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -44,4 +44,4 @@ spec:
               configMap:
                 name: postgres-backup-scripts
                 defaultMode: 0755
-{{- end }}
+{{- end -}}

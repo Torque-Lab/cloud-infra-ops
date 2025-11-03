@@ -1,4 +1,4 @@
-{{- if .Values.infraProvisioner.autoscaling.enabled }}
+{{- if .Values.infraProvisioner.autoscaling.enabled -}}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -25,4 +25,4 @@ spec:
         target:
           type: Utilization
           averageUtilization: {{ .Values.infraProvisioner.autoscaling.targetMemoryUtilizationPercentage }}
-{{- end }}
+{{- end -}}
