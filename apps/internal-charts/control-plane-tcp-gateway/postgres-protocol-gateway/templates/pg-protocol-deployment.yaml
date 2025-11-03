@@ -21,8 +21,8 @@ spec:
           image: {{ .Values.postgresProtocolGateway.image.repository }}:{{ .Values.postgresProtocolGateway.image.tag | default .Chart.AppVersion }}
           imagePullPolicy: {{ .Values.postgresProtocolGateway.image.pullPolicy }}
           ports:
-            - name: {{ .Values.postgresProtocolGateway.ports.name }}
-              containerPort: {{ .Values.postgresProtocolGateway.ports.containerPort }}
+            - name: {{ (index .Values.postgresProtocolGateway.ports 0).name }}
+              containerPort: {{ (index .Values.postgresProtocolGateway.ports 0).containerPort }}
           resources:
             {{- toYaml .Values.postgresProtocolGateway.resources | nindent 12 }}
           securityContext:

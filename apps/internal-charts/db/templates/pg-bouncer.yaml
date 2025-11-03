@@ -20,7 +20,7 @@ spec:
         - containerPort: 6432
         envFrom:
           - secretRef:
-              name: backend-common-secret
+              name: common-backend-secret
         volumeMounts:
         - name: config
           mountPath: /etc/pgbouncer

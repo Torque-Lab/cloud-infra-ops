@@ -30,9 +30,11 @@ postgres:
     backup:
         enabled: true
         schedule: "0 0 * * *"  
-        retention: 7           
-
-
+        retention: 7   
+    pgbouncer:
+        service:
+            port: 6432
+            targetPort: 6432
 env:
   POSTGRES_USER: "postgres"
   POSTGRES_PASSWORD: "postgresMbuguv767ug"

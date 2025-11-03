@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/Torque-Lab/cloud-infra-ops.git
     targetRevision: main
-    path: apps/internal-charts/postgres
+    path: apps/internal-charts/db
   destination:
     server: https://kubernetes.default.svc
     namespace: internal-backend

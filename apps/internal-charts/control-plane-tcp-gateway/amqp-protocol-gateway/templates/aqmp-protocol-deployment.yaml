@@ -21,8 +21,8 @@ spec:
           image: {{ .Values.rabbitAMQPGateway.image.repository }}:{{ .Values.rabbitAMQPGateway.image.tag | default .Chart.AppVersion }}
           imagePullPolicy: {{ .Values.rabbitAMQPGateway.image.pullPolicy }}
           ports:
-            - name: {{ .Values.rabbitAMQPGateway.ports.name }}
-              containerPort: {{ .Values.rabbitAMQPGateway.ports.containerPort }}
+            - name: {{(index .Values.rabbitAMQPGateway.ports 0).name }}
+              containerPort: {{(index .Values.rabbitAMQPGateway.ports 0).containerPort }}
           resources:
             {{- toYaml .Values.rabbitAMQPGateway.resources | nindent 12 }}
           securityContext:

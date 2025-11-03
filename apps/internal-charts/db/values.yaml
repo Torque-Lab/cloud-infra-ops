@@ -17,7 +17,7 @@ postgres:
     autoscaling:
         enabled: false
         minReplicas: 1
-        maxReplicas: 2
+        maxReplicas: 1
         targetCPUUtilizationPercentage: 80
         targetMemoryUtilizationPercentage: 80
     service:
@@ -30,4 +30,7 @@ postgres:
         enabled: false
         schedule: "0 0 * * *"  
         retention: 7           
-      
+    pgbouncer:
+       service:
+         port: 6432
+         targetPort: 6432
