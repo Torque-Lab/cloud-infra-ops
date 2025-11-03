@@ -6,3 +6,5 @@ README.md
 secret-tcp-gateway.yaml
 .env
 .env.tcp
+bc-secret.yaml
+tcp-secret.yaml

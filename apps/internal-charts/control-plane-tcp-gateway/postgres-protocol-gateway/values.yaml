@@ -1,5 +1,5 @@
 postgresProtocolGateway:
-    namespace: control-plane-tcp-gateway
+    namespace: tcp-gateway
     replicasCount: 1
     image:
         repository: ring0exec/cloud-vector-postgres-protocol-gateway

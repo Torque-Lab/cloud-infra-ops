@@ -1,6 +1,9 @@
 backendPoint:
-  name: backend-common-secret
-  namespace: backend
+  name: common-backend-secret
+  namespace: internal-backend
 frontendPoint:
   name: frontend-secret
-  namespace: frontend
+  namespace: internal-frontend
+tcpGatewayPoint:
+  name: tcp-gateway-secret
+  namespace: tcp-gateway

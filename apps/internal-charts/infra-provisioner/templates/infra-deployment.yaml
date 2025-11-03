@@ -16,6 +16,13 @@ spec:
       labels:
         app: {{ .Chart.Name }}
     spec:
+      tolerations:
+        - key: "spot"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
+      nodeSelector:
+           cloud.google.com/gke-nodepool: prod-cloud-vector-spot-nodes
       containers:
         - name: {{ .Chart.Name }}
           image: {{ .Values.infraProvisioner.image.repository }}:{{ .Values.infraProvisioner.image.tag | default .Chart.AppVersion  }}
@@ -31,4 +38,4 @@ spec:
               type: RuntimeDefault
           envFrom:
             - secretRef:
-                name: backend-common-secret
+                name: common-backend-secret
