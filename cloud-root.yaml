@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/Torque-Lab/cloud-infra-ops.git
-    path: argocd
+    path: .
     targetRevision: main
     directory:
       recurse: true
