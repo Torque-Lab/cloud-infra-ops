@@ -46,8 +46,6 @@ spec:
           items:
             - key: pgbouncer.ini
               path: pgbouncer.ini
-            - key: userlist.txt
-              path: userlist.txt
           defaultMode: 0644 #base8
       - name: config-volume
         emptyDir: {}

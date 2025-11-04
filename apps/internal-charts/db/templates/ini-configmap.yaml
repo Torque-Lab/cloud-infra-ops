@@ -10,8 +10,7 @@ data:
     [pgbouncer]
     listen_addr = 0.0.0.0
     listen_port = 6432
-    auth_type = trust
-    auth_file = /etc/pgbouncer/userlist.txt
+    auth_type = any
     pool_mode = transaction
     max_client_conn = 1000
     default_pool_size = 20
@@ -20,4 +19,3 @@ data:
     log_disconnections = 1
     ignore_startup_parameters = extra_float_digits
     
-  userlist.txt: |
