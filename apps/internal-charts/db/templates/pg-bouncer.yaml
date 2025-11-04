@@ -29,6 +29,26 @@ spec:
         ports:
         - containerPort: 6432
         command: ["pgbouncer", "/etc/pgbouncer/pgbouncer.ini"]
+        env:
+         - name: POSTGRES_HOST
+           value: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-service"
+         - name: POSTGRES_PORT
+           value: "{{ .Values.postgres.service.port | quote }}"
+         - name: POSTGRES_DB
+           valueFrom:
+                secretKeyRef:
+                  name: common-backend-secret
+                  key: POSTGRES_DB
+         - name: POSTGRES_USER
+           valueFrom:
+                secretKeyRef:
+                  name: common-backend-secret
+                  key: POSTGRES_USER
+         - name: POSTGRES_PASSWORD
+           valueFrom:
+                secretKeyRef:
+                  name: common-backend-secret
+                  key: POSTGRES_PASSWORD
         resources:
           requests:
             cpu: 50m
@@ -46,7 +66,9 @@ spec:
           items:
             - key: pgbouncer.ini
               path: pgbouncer.ini
+            - key: userlist.txt
+              path: userlist.txt
           defaultMode: 0644 #base8
-      - name: config-volume
+      - name: config-volum
         emptyDir: {}
           
