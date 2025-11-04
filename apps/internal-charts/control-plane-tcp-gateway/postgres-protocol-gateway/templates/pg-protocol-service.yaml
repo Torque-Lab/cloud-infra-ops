@@ -13,4 +13,4 @@ spec:
     name: {{ (index .Values.postgresProtocolGateway.ports 0).name }}
     port: {{ (index .Values.postgresProtocolGateway.ports 0).port }}
     targetPort: {{ (index .Values.postgresProtocolGateway.ports 0).containerPort }}
-  type: LoadBalancer
+  type: ClusterIP

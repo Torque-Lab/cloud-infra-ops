@@ -31,6 +31,9 @@ gatewaysListForCertificate:
     host: pg-cloud-vector.suvidhaportal.com
     secret: postgres
     namespace: tcp-gateway
+    service: postgres-protocol-gateway-public-service
+    port: 5432
+
   redis:
     host: redis-cloud-vector.suvidhaportal.com
     secret: redis

@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: "{{ .Chart.Name }}-tcp-postgres"
+   # This is for testing ideally it should have dedicated LB
+  namespace: {{ .Values.gatewaysListForCertificate.postgres.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-45"
+spec:
+  hosts:
+    - "{{ .Values.gatewaysListForCertificate.postgres.host }}"
+  gateways:
+    - {{ .Values.namespace | default "istio-system" }}/{{ .Chart.Name }}-gateway
+  tcp:
+    - match:
+        - port: {{ .Values.gatewaysListForCertificate.postgres.port }}
+      route:
+        - destination:
+            host: "{{ .Values.gatewaysListForCertificate.postgres.service }}.{{ .Values.gatewaysListForCertificate.postgres.namespace }}.svc.cluster.local"
+            port:
+              number: {{ .Values.gatewaysListForCertificate.postgres.port }}
