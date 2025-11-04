@@ -3,8 +3,8 @@ postgres:
     name: postgres
     replicasCount: 1
     image:
-        repository: postgres
-        tag: latest
+        repository: ring0exec/cloud-vector-postgres
+        tag: v1
         pullPolicy: Always
         pullSecret: regcred
     resources:
