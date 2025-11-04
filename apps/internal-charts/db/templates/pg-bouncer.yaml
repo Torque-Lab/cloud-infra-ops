@@ -69,6 +69,6 @@ spec:
             - key: userlist.txt
               path: userlist.txt
           defaultMode: 0644 #base8
-      - name: config-volum
+      - name: config-volume
         emptyDir: {}
           
