@@ -33,7 +33,7 @@ spec:
          - name: POSTGRES_HOST
            value: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-service"
          - name: POSTGRES_PORT
-           value: "{{ .Values.postgres.service.port | quote }}"
+           value: "{{ .Values.postgres.service.port }}"
          - name: POSTGRES_DB
            valueFrom:
                 secretKeyRef:
