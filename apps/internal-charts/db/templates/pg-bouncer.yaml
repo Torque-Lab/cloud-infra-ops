@@ -28,9 +28,7 @@ spec:
         image: edoburu/pgbouncer
         ports:
         - containerPort: 6432
-        envFrom:
-          - secretRef:
-              name: common-backend-secret
+        command: ["pgbouncer", "/etc/pgbouncer/pgbouncer.ini"]
         resources:
           requests:
             cpu: 50m
