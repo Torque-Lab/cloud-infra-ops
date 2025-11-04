@@ -16,7 +16,7 @@ spec:
       initContainers:
       - name: init-pgbouncer-config
         image: busybox
-        command: ['sh', '-c', 'cp /config-temp/* /etc/pgbouncer/ && chmod 666/etc/pgbouncer/*']
+        command: ['sh', '-c', 'cp /config-temp/* /etc/pgbouncer/ && chmod 666 /etc/pgbouncer/*']
         volumeMounts:
         - name: config
           mountPath: /config-temp
