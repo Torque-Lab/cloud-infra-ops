@@ -2,7 +2,7 @@ infraProvisioner:
     replicasCount: 1
     image:
         repository: ring0exec/cloud-vector-infra-provisioner
-        tag: 3f88a6db03365d786c04ca71ca6d5d44d796461d
+        tag: d3bacde85b74923e467c7f21df18d4a4df4012b6
         pullPolicy: Always
         pullSecret: regcred
     ports:
