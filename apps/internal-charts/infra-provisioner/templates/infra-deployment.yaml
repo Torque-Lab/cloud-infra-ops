@@ -39,3 +39,11 @@ spec:
           envFrom:
             - secretRef:
                 name: common-backend-secret
+          volumeMounts:
+            - name: gcloud-credentials
+              mountPath: /root/.config/gcloud
+              readOnly: true
+      volumes:
+      - name: gcloud-credentials
+        secret:
+          secretName: gcloud-credentials
