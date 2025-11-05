@@ -2,7 +2,7 @@ frontend:
     replicasCount: 1
     image:
         repository: ring0exec/cloud-vector-frontend
-        tag: 01a7b9fac5df453dc4f7909617771f984c9f5dfa
+        tag: 5333d1b8c576e27625f3149cfccc952480e72584
         pullPolicy: Always
         pullSecret: regcred
     ports:
