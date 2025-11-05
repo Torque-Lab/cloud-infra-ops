@@ -15,21 +15,13 @@ spec:
               command: ["/bin/sh", "/scripts/backup.sh"]
               env:
                 - name: PGHOST
-                  value: {{ .Values.postgres.serviceName }}
+                  value:  "{{ .Values.postgres.name }}-pgbouncer-{{ .Values.postgres.db_id }}-service"
                 - name: PGUSER
-                  valueFrom:
-                    secretKeyRef:
-                      name: postgres-secret
-                      key: username
-                - name: PGPASSWORD
-                  valueFrom:
-                    secretKeyRef:
-                      name: postgres-secret
-                      key: password
+                  value: "{{ .Values.env.POSTGRES_USER }}"
                 - name: PGDATABASE
-                  value: {{ .Values.postgres.database }}
+                  value: "{{ .Values.env.POSTGRES_DB }}"
                 - name: BUCKET_NAME
-                  value: {{ .Values.backup.bucketName }}
+                  value: "{{ .Values.postgres.backup.bucketName }}"
                 - name: CONTROL_PLANE_TOKEN
                   valueFrom:
                     secretKeyRef:

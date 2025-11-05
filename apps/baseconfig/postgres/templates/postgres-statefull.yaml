@@ -31,11 +31,11 @@ spec:
           # this hard code is intentional tcp gateay do real auth
           env:
             - name: POSTGRES_USER
-              value: {{ .Values.env.POSTGRES_USER }}
+              value: {{ .Values.env.POSTGRES_USER | quote }}
             - name: POSTGRES_PASSWORD
-              value: {{ .Values.env.POSTGRES_PASSWORD }}
+              value: {{ .Values.env.POSTGRES_PASSWORD | quote }}
             - name: POSTGRES_DB
-              value: {{ .Values.env.POSTGRES_DB }}
+              value: {{ .Values.env.POSTGRES_DB | quote }}
           volumeMounts:
             - mountPath: /var/lib/postgresql/data/rpgdata      
               name: data

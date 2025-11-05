@@ -32,12 +32,13 @@ postgres:
         enabled: true
         schedule: "0 0 * * *"  
         retention: 7   
+        bucketName: ""
     pgbouncer:
         service:
             port: 6432
             targetPort: 6432
 env:
-  POSTGRES_USER: "postgres"
-  POSTGRES_PASSWORD: "postgresMbuguv767ug"
-  POSTGRES_DB: "postgres"
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgresMbuguv767ug
+  POSTGRES_DB: postgres
     

@@ -2,7 +2,6 @@
 secret-backend.yaml
 secret-frontend.yaml
 secret.yaml
-README.md
 secret-tcp-gateway.yaml
 .env
 .env.tcp

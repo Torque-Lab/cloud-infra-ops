@@ -13,14 +13,27 @@ spec:
       labels:
         app: "{{ .Values.postgres.name }}-pgbouncer-{{ .Values.postgres.db_id }}"
     spec:
+      initContainers:
+      - name: init-pgbouncer-config
+        image: busybox
+        command: ['sh', '-c', 'cp /config-temp/* /etc/pgbouncer/ && chmod 666 /etc/pgbouncer/*']
+        volumeMounts:
+        - name: config
+          mountPath: /config-temp
+          readOnly: true
+        - name: config-volume
+          mountPath: /etc/pgbouncer
       containers:
       - name: pgbouncer
         image: edoburu/pgbouncer
         ports:
         - containerPort: 6432
-        volumeMounts:
-        - name: config
-          mountPath: /etc/pgbouncer
+        command: ["pgbouncer", "/etc/pgbouncer/pgbouncer.ini"]
+        env:
+         - name: POSTGRES_HOST
+           value: "{{ .Values.postgres.name }}-{{ .Values.postgres.db_id }}-service"
+         - name: POSTGRES_PORT
+           value: "{{ .Values.postgres.service.port }}"
         resources:
           requests:
             cpu: 50m
@@ -28,8 +41,19 @@ spec:
           limits:
             cpu: 200m
             memory: 256Mi
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/pgbouncer
       volumes:
-        - name: config
-          configMap:
-            name: "{{ .Values.postgres.name }}-pgbouncer-{{ .Values.postgres.db_id }}-ini-configmap
+      - name: config
+        configMap:
+          name: "{{ .Values.postgres.name }}-pgbouncer-{{ .Values.postgres.db_id }}-ini-configmap"
+          items:
+            - key: pgbouncer.ini
+              path: pgbouncer.ini
+            - key: userlist.txt
+              path: userlist.txt
+          defaultMode: 0644 #base8
+      - name: config-volume
+        emptyDir: {}
           
