@@ -2,7 +2,7 @@ httpsServer:
     replicasCount: 1
     image:
         repository: ring0exec/cloud-vector-https-server
-        tag: 6211005cc5c47bb2718ea27ff6d8480347cb0ad6
+        tag: 5333d1b8c576e27625f3149cfccc952480e72584
         pullPolicy: Always
         pullSecret: regcred
     ports:
