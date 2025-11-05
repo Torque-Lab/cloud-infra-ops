@@ -4,6 +4,7 @@ secret-frontend.yaml
 secret.yaml
 secret-tcp-gateway.yaml
 .env
+.env.f
 .env.tcp
 bc-secret.yaml
 tcp-secret.yaml
