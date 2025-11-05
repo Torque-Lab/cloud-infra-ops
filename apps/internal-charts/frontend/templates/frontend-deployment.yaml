@@ -41,4 +41,4 @@ spec:
               type: RuntimeDefault
             env:
               - name: NEXT_PUBLIC_URL
-                value: https://cloud-vector.suvidhaportal.com
+                value: "https://cloud-vector.suvidhaportal.com"
