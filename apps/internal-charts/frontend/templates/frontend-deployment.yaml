@@ -39,6 +39,6 @@ spec:
               drop: ["ALL"]
             seccompProfile:
               type: RuntimeDefault
-            env:
-              - name: NEXT_PUBLIC_URL
-                value: "https://cloud-vector.suvidhaportal.com"
+            envFrom:
+               - secretRef:
+                   name: frontend-secret
