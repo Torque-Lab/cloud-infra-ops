@@ -3,7 +3,7 @@ rabbitAMQPGateway:
     replicasCount: 1
     image:
         repository: ring0exec/cloud-vector-rabbit-amqp-gateway
-        tag: a5f9412cabf5653ee4e61c00dd3427cebe2ae64c
+        tag: c79fd2f8fc5a71d69df93f6293430d4955ecdf50
         pullPolicy: Always
         pullSecret: regcred
     ports:
